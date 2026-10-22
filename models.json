@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "models": {
+    "clap-fp32": {
+      "repo": "bdrgon/clap-htsat-unfused-audio-embedder-onnx",
+      "revision": "49bc4fb0d489530de1f4752b1ad0a875e280e876",
+      "artifact": "audio_model.onnx",
+      "sha256": "4ce07ac4fd025f458ce11ea851844bd9f5ae18d6be9f8785cc2e2dedf0afc1f8",
+      "frontend": "clap-v1",
+      "output": "embedding",
+      "dimension": 512,
+      "quantization": "fp32"
+    },
+    "clap-int8": {
+      "repo": "bdrgon/clap-htsat-unfused-audio-embedder-onnx",
+      "revision": "49bc4fb0d489530de1f4752b1ad0a875e280e876",
+      "artifact": "audio_model_int8.onnx",
+      "sha256": "d70f3cd73c53e71885e168c396398a9eac29fd7d990ca807578de20752e3696f",
+      "frontend": "clap-v1",
+      "output": "embedding",
+      "dimension": 512,
+      "quantization": "int8"
+    },
+    "clap-int4": {
+      "repo": "bdrgon/clap-htsat-unfused-audio-embedder-onnx",
+      "revision": "49bc4fb0d489530de1f4752b1ad0a875e280e876",
+      "artifact": "audio_model_int4.onnx",
+      "sha256": "a5e52e977b91947546d07d24fc5300d7f1e2e6ac7106523f0bbb0f8284722a99",
+      "frontend": "clap-v1",
+      "output": "embedding",
+      "dimension": 512,
+      "quantization": "int4"
+    },
+    "gemma-embedding-fp32": {
+      "repo": "bdrgon/embeddinggemma2-audio-tower-onnx",
+      "revision": "33a04f9fcc02ff7bb439bf30c62dbcc675fab214",
+      "artifact": "audio_embedding.onnx",
+      "sha256": "41ae9b77cf7c0add5843887ce4ed44d71e8d3558959226868faf25b870642f0b",
+      "frontend": "gemma4-v1",
+      "output": "embedding",
+      "dimension": 512,
+      "quantization": "fp32",
+      "sidecars": {
+        "audio_embedding.data": "a9e6f1aee2489d02eb7d4953e9bc2bb2e03cc557bf4f01654f1af9dcf5d7d4dd"
+      }
+    },
+    "gemma-embedding-int8": {
+      "repo": "bdrgon/embeddinggemma2-audio-tower-onnx",
+      "revision": "33a04f9fcc02ff7bb439bf30c62dbcc675fab214",
+      "artifact": "audio_embedding_int8.onnx",
+      "sha256": "41441cf3cccd9c755ca7efbdb6b69c726632a516d200d8230daa030e9fb840bd",
+      "frontend": "gemma4-v1",
+      "output": "embedding",
+      "dimension": 512,
+      "quantization": "int8"
+    },
+    "gemma-embedding-int4": {
+      "repo": "bdrgon/embeddinggemma2-audio-tower-onnx",
+      "revision": "33a04f9fcc02ff7bb439bf30c62dbcc675fab214",
+      "artifact": "audio_embedding_int4.onnx",
+      "sha256": "d4c269c7a024d1d2d495d121a2b608c4612833fa52e5eda5d7a9345ee493a3fe",
+      "frontend": "gemma4-v1",
+      "output": "embedding",
+      "dimension": 512,
+      "quantization": "int4"
+    },
+    "gemma-tower-fp32": {
+      "repo": "bdrgon/embeddinggemma2-audio-tower-onnx",
+      "revision": "33a04f9fcc02ff7bb439bf30c62dbcc675fab214",
+      "artifact": "audio_tower.onnx",
+      "sha256": "08f2eb80d794d4cdef5e8d16224ac1685893cad2e6cb7e68d8bed614a7c3a023",
+      "frontend": "gemma4-v1",
+      "output": "raw-tower",
+      "dimension": 1536,
+      "quantization": "fp32"
+    },
+    "gemma-tower-int8": {
+      "repo": "bdrgon/embeddinggemma2-audio-tower-onnx",
+      "revision": "33a04f9fcc02ff7bb439bf30c62dbcc675fab214",
+      "artifact": "audio_tower_int8.onnx",
+      "sha256": "0fee17fc7ba12788122634d1780ae15bcce48b6c2e3943e47d98e92b8cace6ae",
+      "frontend": "gemma4-v1",
+      "output": "raw-tower",
+      "dimension": 1536,
+      "quantization": "int8"
+    },
+    "gemma-tower-int4": {
+      "repo": "bdrgon/embeddinggemma2-audio-tower-onnx",
+      "revision": "33a04f9fcc02ff7bb439bf30c62dbcc675fab214",
+      "artifact": "audio_tower_int4.onnx",
+      "sha256": "b0a3d2e2a0f3177322bab1947577c2e7abd408e063e3c6d7619f8aef8a96eded",
+      "frontend": "gemma4-v1",
+      "output": "raw-tower",
+      "dimension": 1536,
+      "quantization": "int4"
+    }
+  }
+}

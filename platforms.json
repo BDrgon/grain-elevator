@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "platforms": {
+    "windows-x64": {
+      "host": "Windows", "machine": ["AMD64", "x86_64"],
+      "target": "x86_64-pc-windows-gnu", "exe": "grain-elevator.exe",
+      "library": "grain_elevator.dll", "runtime": "onnxruntime.dll", "archive": "zip"
+    },
+    "linux-x64": {
+      "host": "Linux", "machine": ["x86_64", "AMD64"],
+      "target": "x86_64-unknown-linux-gnu", "exe": "grain-elevator",
+      "library": "libgrain_elevator.so", "runtime": "libonnxruntime.so", "archive": "tar.gz"
+    }
+  }
+}

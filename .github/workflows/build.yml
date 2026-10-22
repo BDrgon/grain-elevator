@@ -1,0 +1,45 @@
+name: Portable builds
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: Catalog model key or all
+        default: clap-fp32
+        required: true
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2022
+            platform: windows-x64
+            target: x86_64-pc-windows-gnu
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - run: python -m pip install -r tools/requirements.txt
+      - run: cargo test --locked
+      - name: Build Windows package
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $crt = Get-ChildItem 'C:/Program Files/Microsoft Visual Studio/2022' -Directory -Recurse -Filter Microsoft.VC143.CRT | Where-Object { $_.FullName -match '\\x64\\' } | Sort-Object FullName -Descending | Select-Object -First 1
+          if (-not $crt) { throw 'Licensed x64 VC redistributable not found' }
+          python tools/build.py --model '${{ inputs.model }}' --platform windows-x64 --vc-redist $crt.FullName
+      - name: Test packaged models
+        shell: bash
+        run: python tools/smoke.py --all
+      - uses: actions/upload-artifact@v4
+        with:
+          name: grain-elevator-${{ matrix.platform }}
+          path: |
+            dist/*.zip
+            dist/*.tar.gz
+            test-results/*.json

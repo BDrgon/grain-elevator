@@ -1,0 +1,11 @@
+Grain Elevator 0.1.0
+
+Audio decoding, CLAP DSP, FFT, and resampling were adapted from the owner's
+COVE.EMBED implementation. Model weights are obtained from the selected pinned
+Hugging Face repository and retain their upstream licensing/attribution.
+
+Gemma preprocessing implements the pinned Hugging Face Transformers 5.19.0
+Gemma4AudioFeatureExtractor behavior (Apache-2.0, Hugging Face contributors).
+CLAP: LAION CLAP HTSAT Unfused. Gemma: Google EmbeddingGemma 2.
+Symphonia is MPL-2.0 and is used unmodified. ONNX Runtime is MIT licensed.
+Package licenses/ contains model, runtime and Rust dependency notices/licenses.

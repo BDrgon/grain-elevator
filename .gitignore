@@ -1,0 +1,35 @@
+# Rust build artifacts
+target/
+*.rlib
+*.d
+
+# Build outputs
+dist/
+*.exe
+*.dll
+*.so
+*.dylib
+*.zip
+*.tar.gz
+
+# Test results
+test-results/
+
+# Hugging Face cache
+.hf-cache/
+
+# Build directories
+.build/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Editor
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,29 @@
+[package]
+name = "grain-elevator"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.89"
+license = "MIT OR Apache-2.0"
+description = "Native audio to embeddings, with build-selected Hugging Face weights"
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[[bin]]
+name = "grain-elevator"
+path = "src/main.rs"
+
+[dependencies]
+thiserror = "2"
+sha2 = "0.10"
+memmap2 = "0.9"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+symphonia = { version = "=0.6.1", default-features = false, features = ["wav", "aiff", "mp3", "flac", "ogg", "aac", "alac", "adpcm", "pcm", "isomp4", "caf", "vorbis", "all-meta"] }
+ort = { version = "=2.0.0-rc.13", default-features = false, features = ["std", "load-dynamic", "api-27"] }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = "debuginfo"
