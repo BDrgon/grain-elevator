@@ -22,10 +22,10 @@
       "quantization": "int8"
     },
     "clap-int4": {
-      "repo": "bdrgon/clap-htsat-unfused-audio-embedder-onnx",
-      "revision": "49bc4fb0d489530de1f4752b1ad0a875e280e876",
-      "artifact": "audio_model_int4.onnx",
-      "sha256": "a5e52e977b91947546d07d24fc5300d7f1e2e6ac7106523f0bbb0f8284722a99",
+      "repo": "bdrgon/clap-htsat-unfused-audio-embedder-onnx-INT4",
+      "revision": "17fcfded2c8dc579b7779cb8e8a5cca62fdc3f2d",
+      "artifact": "audio_model_int4_trained_v1.onnx",
+      "sha256": "7854e5bb1c3863a4e20e78b580f8c424c05189bcb17502704d52595637b87996",
       "frontend": "clap-v1",
       "output": "embedding",
       "dimension": 512,

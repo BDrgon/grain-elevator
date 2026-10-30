@@ -4,7 +4,7 @@ on:
     inputs:
       model:
         description: Catalog model key or all
-        default: clap-fp32
+        default: clap-int4
         required: true
 jobs:
   build:

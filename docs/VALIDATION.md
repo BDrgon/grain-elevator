@@ -58,6 +58,25 @@ Gemma FP32 final/tower outputs and all quantized variants remain distinct model
 spaces. Raw towers expose the unpooled state tensor and mask as requested.
 Human listening is still required before choosing an app default.
 
+## Trained CLAP INT4 v1 update (2026-10-29)
+
+The `clap-int4` Windows package now embeds `audio_model_int4_trained_v1.onnx`
+from `bdrgon/clap-htsat-unfused-audio-embedder-onnx-INT4` at commit
+`17fcfded2c8dc579b7779cb8e8a5cca62fdc3f2d`. The earlier table describes the
+original artifacts, not this replacement.
+
+Manual CLI checks passed: a generated half-second drum WAV produced 512 finite,
+normalized values with `[1,512]` metadata; the source file stayed unchanged;
+existing output and missing input paths were rejected. Native CLI/C ABI parity
+and repeatability passed. Pinned processor/ORT comparison measured maximum
+absolute error 0.00134 and cosine 0.999968741. Embedded EXE/DLL model hashes and
+portable ZIP integrity were verified. All three build tests passed.
+
+Synthetic continuity passed 9/10 triples (the unchanged 90% gate). The pitch
+triple 220/330/440 Hz still violated the expectation: adjacent distances
+0.103938 and 0.047215 versus span distance 0.059447. This smoke test does not
+establish perceptual quality or full-corpus native parity.
+
 ## Artifact repair
 
 The Gemma FP32 final graph really did reference twelve small external Constant

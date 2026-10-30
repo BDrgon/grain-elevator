@@ -258,7 +258,7 @@ def main():
         (folder/'SHA256SUMS').write_text(''.join(f'{sha256(p)}  {p.relative_to(folder).as_posix()}\n' for p in files))
         if not args.no_archive:
             if target['archive']=='zip':
-                with zipfile.ZipFile(folder.with_suffix('.zip'),'w',compression=zipfile.ZIP_DEFLATED,allowZip64=True) as archive:
+                with zipfile.ZipFile(folder.with_suffix('.zip'),'w',compression=zipfile.ZIP_DEFLATED,allowZip64=True,strict_timestamps=False) as archive:
                     for file in sorted(folder.rglob('*')):
                         if file.is_file(): archive.write(file,file.relative_to(folder))
             else:

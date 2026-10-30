@@ -10,14 +10,15 @@ Install Rust's Windows GNU toolchain and MinGW, plus a development Python:
 
 ```powershell
 python -m pip install -r tools/requirements.txt
-python tools/build.py --model clap-fp32 --platform windows-x64 --vc-redist C:/licensed/x64/CRT
+python tools/build.py --model clap-int4 --platform windows-x64 --vc-redist C:/licensed/x64/CRT
 python tools/build.py --model all --platform windows-x64 --vc-redist C:/licensed/x64/CRT
 python tools/build.py --model https://huggingface.co/bdrgon/embeddinggemma2-audio-tower-onnx/resolve/main/audio_embedding_int8.onnx --platform windows-x64 --vc-redist C:/licensed/x64/CRT
 ```
 
 `--model` is a catalog key, `all`, or a registered artifact's `resolve`/`blob` URL.
 `--models OTHER.json` selects another catalog. All nine variants are registered
-in [models.json](models.json). Add new model contracts there and implement the
+in [models.json](models.json). The `clap-int4` build uses the trained v1 INT4
+artifact from [the dedicated model repository](https://huggingface.co/bdrgon/clap-htsat-unfused-audio-embedder-onnx-INT4), pinned by commit and SHA-256. Add new model contracts there and implement the
 frontend when needed; an arbitrary ONNX graph is not automatically compatible.
 
 `--offline` uses cached files and the catalog's revision pin (including URL `main`).
@@ -37,10 +38,10 @@ the independently usable executable and library.
 ## Run
 
 ```powershell
-./dist/clap-fp32-windows-x64/grain-elevator.exe info
-./dist/clap-fp32-windows-x64/grain-elevator.exe embed sample.wav
-./dist/clap-fp32-windows-x64/grain-elevator.exe embed sample.wav --output vector.f32
-./dist/clap-fp32-windows-x64/grain-elevator.exe synth-test --report distances.json
+./dist/clap-int4-windows-x64/grain-elevator.exe info
+./dist/clap-int4-windows-x64/grain-elevator.exe embed sample.wav
+./dist/clap-int4-windows-x64/grain-elevator.exe embed sample.wav --output vector.f32
+./dist/clap-int4-windows-x64/grain-elevator.exe synth-test --report distances.json
 ```
 
 The output file is float32 little-endian with a `.metadata.json` companion naming
@@ -54,7 +55,7 @@ length; no pooling is applied. Their mask travels with the result.
 
 ```rust,no_run
 use grain_elevator::Encoder;
-let encoder = Encoder::open_image("dist/clap-fp32-windows-x64/grain_elevator.dll", None)?;
+let encoder = Encoder::open_image("dist/clap-int4-windows-x64/grain_elevator.dll", None)?;
 let value = encoder.embed_file("sample.wav")?;
 let pcm_value = encoder.embed_pcm(&mono_samples, 48_000)?;
 // value.values, value.shape, value.mask, value.identity
@@ -72,8 +73,8 @@ for a host app; packaged CLI builds find it beside their executable.
 ```powershell
 cargo test --locked
 python tools/smoke.py --all
-python tools/smoke.py dist/clap-fp32-windows-x64 --reference
-python tools/synth_checks.py dist/clap-fp32-windows-x64
+python tools/smoke.py dist/clap-int4-windows-x64 --reference
+python tools/synth_checks.py dist/clap-int4-windows-x64
 python tools/test_build.py
 ```
 
